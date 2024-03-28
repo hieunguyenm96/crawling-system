@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+
+        /* Product List Styles */
+        .product-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .product-list li {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .product-list img {
+            width: 150px;
+            height: 150px;
+            margin-right: 20px;
+            border-radius: 8px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-info h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .product-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        /* Pagination Styles */
+        .pagination {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .pagination .pagination li {
+            display: inline;
+            margin: 0 5px;
+        }
+
+        .pagination .pagination li.active a {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+            cursor: default;
+        }
+
+        .pagination .pagination li.disabled a {
+            color: #868e96;
+            pointer-events: none;
+        }
+
+        .pagination .pagination li a {
+            padding: 8px 12px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #007bff;
+            transition: background-color 0.3s;
+        }
+
+        .pagination .pagination li a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Danh sách sản phẩm của Lock&Lock</h1>
+    
+    <div class="product-list">
+        <ul>
+            {% for product in pagination %}
+                <li>
+                    <img src="{{ product.image }}" alt="{{ product.name }}">
+                    <div class="product-info">
+                        <h2>{{ product.name }}</h2>
+                        <p>Giá gốc: {% if product.originalPrice == 0 %} {{ product.price|number_format(0, '.', ',') }} đ {% else %} {{ product.originalPrice|number_format(0, '.', ',') }} đ {% endif %}</p>
+                        <p>Giảm giá: {% if product.discount == '' %} 0% {% else %} {{ product.discount }} {% endif %}</p>
+                        <p>Giá: {{ product.price|number_format(0, '.', ',') }} đ</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    <!-- Add any JavaScript scripts here -->
+    <!-- End -->
+</body>
+</html>
