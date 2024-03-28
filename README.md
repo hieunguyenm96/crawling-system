@@ -1,7 +1,7 @@
 # Crawling System
 
 ## Description
-A simple app to crawl all products of this brand and save to database.
+A simple app to crawl all products of Lock&Lock brand and save to database.
 This is the demo link: https://lovetech.biz/products?page=1
 
 ## Features
